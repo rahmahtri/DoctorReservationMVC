@@ -65,4 +65,10 @@ public class ReservationController {
         reservationService.booked(dto, scheduleId);
         return "redirect:/doctor/index";
     }
+
+    @GetMapping("/delete")
+    public String delete(@RequestParam(required = true) Long id){
+        reservationService.deleteReservation(id);
+        return "redirect:/reservation/index";
+    }
 }

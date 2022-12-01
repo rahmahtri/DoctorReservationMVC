@@ -10,9 +10,9 @@
         <table th:attr="data-action=${type}">
             <tbody>
             <tr>
-                <td><label>Date*</label></td>
+                <td><label>Date</label></td>
                 <td>
-                    <input type="text" th:field="*{date}">
+                    <input type="date" th:field="*{date}">
                     <div class="field-validation-error" th:errors="*{date}"></div>
                 </td>
             </tr>

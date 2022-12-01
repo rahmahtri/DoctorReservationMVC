@@ -9,6 +9,7 @@
         <form method="get" class="filter" th:attr="action=@{/schedule/index(doctorId=${doctorId})}">
             <input type="hidden" name="doctorId" th:attr="value=${doctorId}">
         </form>
+        <a class="blue-button create-button" th:href="@{/schedule/upsertForm(doctorId=${doctorId})}">Add New Schedule</a>
         <table>
             <thead>
             <tr>
@@ -22,7 +23,8 @@
             <tbody>
             <tr th:each="schedule: ${grid}">
                 <td>
-                    <a th:href="@{/schedule/upsertForm(doctorId=${doctorId},id=${schedule.id})}" class="blue-button update-button">Add Schedule</a>
+                    <a th:href="@{/schedule/upsertForm(doctorId=${doctorId},id=${schedule.id})}" class="blue-button update-button">Update</a>
+                    <a th:href="@{/schedule/delete(doctorId=${doctorId},id=${schedule.id})}" class="blue-button update-button">Delete</a>
                 </td>
                 <td th:text="${schedule.date}"></td>
                 <td th:text="${schedule.startTreat}"></td>
