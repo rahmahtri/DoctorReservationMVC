@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{layout :: head}"></head>
+<body class="main-body">
+<nav th:replace="~{layout :: navigation}"></nav>
+<header th:replace="~{layout :: header (${breadCrumbs})}"></header>
+<main>
+    <div class="grid-container customer-index">
+        <form method="get" class="filter" th:attr="action=@{/patient/index}">
+            <input type="text" name="fullName" placeholder="Full Name..." th:attr="value=${fullName}">
+            <button class="blue-button" type="submit">Search</button>
+        </form>
+        <a class="blue-button create-button" th:href="@{/patient/upsertForm}">Add New Patient</a>
+        <table>
+            <thead>
+            <tr>
+                <th>Action</th>
+                <th>Full Name</th>
+                <th>Gender</th>
+                <th>Disease</th>
+                <th>Contact Phone</th>
+                <th>Email</th>
+                <th>Address</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="patient: ${grid}">
+                <td>
+                    <a th:href="@{/patient/upsertForm(id=${patient.id})}" class="blue-button update-button">Edit</a>
+                    <a th:href="@{/patient/delete(id=${patient.id})}" class="blue-button delete-button">Delete</a>
+                </td>
+                <td th:text="${patient.fullName}"></td>
+                <td th:text="${patient.gender}"></td>
+                <td th:text="${patient.disease}"></td>
+                <td th:text="${patient.contactPhone}"></td>
+                <td th:text="${patient.email}"></td>
+                <td th:text="${patient.address}"></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="5">
+                    <div class="pagination">
+                        <div th:text="|page ${currentPage} of ${totalPages}|"></div>
+                        <div>
+                            <a th:each="loop:${#numbers.sequence(1,totalPages)}"
+                               th:href="@{/patient/index(page=${loop})}"
+                               th:text="${loop}"></a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</main>
+<footer th:replace="~{layout :: footer}"></footer>
+<th:block th:replace="~{layout :: javascript}"></th:block>
+</body>
+</html>

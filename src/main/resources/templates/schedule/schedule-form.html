@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{layout :: head}"></head>
+<body class="main-body">
+<nav th:replace="~{layout :: navigation}"></nav>
+<header th:replace="~{layout :: header (${breadCrumbs})}"></header>
+<main>
+    <form method="post" class="upsert-form alternate-action" th:object="${schedule}">
+        <input type="hidden" th:field="*{id}"/>
+        <table th:attr="data-action=${type}">
+            <tbody>
+            <tr>
+                <td><label>Date*</label></td>
+                <td>
+                    <input type="text" th:field="*{date}">
+                    <div class="field-validation-error" th:errors="*{date}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Start Treat</label></td>
+                <td>
+                    <input type="text" th:field="*{startTreat}">
+                </td>
+            </tr>
+            <tr>
+                <td><label>End Treat</label></td>
+                <td>
+                    <input type="text" th:field="*{endTreat}">
+                    <div class="field-validation-error" th:errors="*{endTreat}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Doctor</label></td>
+                <td>
+                    <div th:text="${doctorName}" th:field="*{doctorId}"></div>
+                    <div class="field-validation-error" th:errors="*{doctorId}"></div>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+        <button class="blue-button" type="submit" th:text="${type} + ' Schedule'"></button>
+        <a class="blue-button" th:href="@{/doctor/index}">Back to Index</a>
+    </form>
+</main>
+<footer th:replace="~{layout :: footer}"></footer>
+<th:block th:replace="~{layout :: javascript}"></th:block>
+</body>
+</html>

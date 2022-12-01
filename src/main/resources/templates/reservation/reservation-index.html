@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{layout :: head}"></head>
+<body class="main-body">
+<nav th:replace="~{layout :: navigation}"></nav>
+<header th:replace="~{layout :: header (${breadCrumbs})}"></header>
+<main>
+    <div class="grid-container customer-index">
+        <table>
+            <thead>
+            <tr>
+                <th>Action</th>
+                <th>Reservation Number</th>
+                <th>Patient Name</th>
+                <th>Date</th>
+                <th>Start Treat</th>
+                <th>End Treat</th>
+                <th>Doctor Name</th>
+                <th>Created At</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="reservation: ${grid}">
+                <td>
+                    <a th:href="@{/reservation/delete(id=${reservation.id})}" class="blue-button delete-button">Delete</a>
+                </td>
+                <td th:text="${reservation.id}"></td>
+                <td th:text="${reservation.patient}"></td>
+                <td th:text="${reservation.date}"></td>
+                <td th:text="${reservation.startTreat}"></td>
+                <td th:text="${reservation.endTreat}"></td>
+                <td th:text="${reservation.doctorName}"></td>
+                <td th:text="${reservation.createdAt}"></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="5">
+                    <div class="pagination">
+                        <div th:text="|page ${currentPage} of ${totalPages}|"></div>
+                        <div>
+                            <a th:each="loop:${#numbers.sequence(1,totalPages)}"
+                               th:href="@{/reservation/index(page=${loop})}"
+                               th:text="${loop}"></a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</main>
+<footer th:replace="~{layout :: footer}"></footer>
+<th:block th:replace="~{layout :: javascript}"></th:block>
+</body>
+</html>

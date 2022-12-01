@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{layout :: head}"></head>
+<body class="main-body">
+<nav th:replace="~{layout :: navigation}"></nav>
+<header th:replace="~{layout :: header (${breadCrumbs})}"></header>
+<main>
+    <form method="post" class="upsert-form" th:attr="action=@{/reservation/insert(scheduleId=${scheduleId})}" th:object="${reservation}">
+        <input type="hidden" th:field="*{id}"/>
+        <table th:attr="data-action=${type}">
+            <tbody>
+            <tr>
+                <td><label>Date</label></td>
+                <td>
+                    <div th:text="${date}" th:field="*{date}"></div>
+                    <div class="field-validation-error" th:errors="*{date}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Start Treat</label></td>
+                <td>
+                    <div th:text="${startTreat}" th:field="*{startTreat}"></div>
+                    <div class="field-validation-error" th:errors="*{startTreat}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td><label>End Treat</label></td>
+                <td>
+                    <div th:text="${endTreat}" th:field="*{endTreat}"></div>
+                    <div class="field-validation-error" th:errors="*{endTreat}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Doctor</label></td>
+                <td>
+                    <div th:text="${doctorName}" th:field="*{doctorName}"></div>
+                    <div class="field-validation-error" th:errors="*{doctorName}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Patient Name*</label></td>
+                <td>
+                    <select th:field="*{patientId}">
+                        <option th:value=null>No Specific Patient</option>
+                        <option th:each="option : ${patientDropdown}" th:value="${option.longValue}"
+                                th:text="${option.text}" th:selected="${option.longValue == patientId}"/>
+                    </select>
+                    <div class="field-validation-error" th:errors="*{patientId}"></div>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+        <button class="blue-button" type="submit" th:text="${type} +' Reservation'"></button>
+        <a class="blue-button" th:href="@{/schedule/index?doctorId=} + ${doctorId}">Back to Index</a>
+    </form>
+</main>
+<footer th:replace="~{layout :: footer}"></footer>
+<th:block th:replace="~{layout :: javascript}"></th:block>
+</body>
+</html>
