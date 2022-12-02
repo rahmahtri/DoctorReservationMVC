@@ -76,21 +76,18 @@ public class ScheduleServiceImpl implements ScheduleService{
     }
 
     @Override
-    public void saveSchedule(UpsertScheduleDTO dto, Long id) {
-        Optional<Doctor> findDoctor = doctorRepository.findById(dto.getDoctorId());
+    public void saveSchedule(UpsertScheduleDTO dto, Long doctorId) {
+        Optional<Doctor> findDoctor = doctorRepository.findById(doctorId);
         Doctor doctor = findDoctor.get();
 
-        Boolean available = true;
-
-        Optional<Schedule> findSchedule = scheduleRepository.findById(id);
-        Schedule schedule = findSchedule.get();
-
-        schedule.setId(id);
-        schedule.setDate(dto.getDate());
-        schedule.setStartTreat(dto.getStartTreat());
-        schedule.setEndTreat(dto.getEndTreat());
-        schedule.setDoctor(doctor);
-        schedule.setIsAvailable(available);
+        Schedule schedule = new Schedule(
+                dto.getId(),
+                dto.getDate(),
+                dto.getStartTreat(),
+                dto.getEndTreat(),
+                doctor,
+                true
+        );
 
         scheduleRepository.save(schedule);
     }

@@ -43,12 +43,14 @@ public class ScheduleController {
         if(id!=null){
             UpsertScheduleDTO dto = scheduleService.findScheduleByID(id);
             model.addAttribute("schedule", dto);
+            model.addAttribute("doctorId", doctorId);
             model.addAttribute("doctorName", doctorName);
             model.addAttribute("type", "update");
             model.addAttribute("breadCrumbs", "Update Schedule");
         } else {
             UpsertScheduleDTO dto = new UpsertScheduleDTO();
             model.addAttribute("schedule", dto);
+            model.addAttribute("doctorId", doctorId);
             model.addAttribute("doctorName", doctorName);
             model.addAttribute("type", "insert");
             model.addAttribute("breadCrumbs", "Insert Schedule");
@@ -58,9 +60,10 @@ public class ScheduleController {
 
     @PostMapping("/insert")
     public String addSchedule(@ModelAttribute("schedule")UpsertScheduleDTO dto,
+                              @RequestParam(required = true) Long doctorId,
                               Model model){
-        scheduleService.saveSchedule(dto);
-        return "redirect:/schedule/index";
+        scheduleService.saveSchedule(dto, doctorId);
+        return "redirect:/schedule/index?doctorId="+doctorId;
     }
 
     @PostMapping("/update")

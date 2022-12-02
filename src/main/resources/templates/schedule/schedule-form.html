@@ -5,7 +5,7 @@
 <nav th:replace="~{layout :: navigation}"></nav>
 <header th:replace="~{layout :: header (${breadCrumbs})}"></header>
 <main>
-    <form method="post" class="upsert-form alternate-action" th:object="${schedule}">
+    <form method="post" class="upsert-form" th:attr="action=@{/schedule/insert(doctorId=${doctorId})}" th:object="${schedule}">
         <input type="hidden" th:field="*{id}"/>
         <table th:attr="data-action=${type}">
             <tbody>

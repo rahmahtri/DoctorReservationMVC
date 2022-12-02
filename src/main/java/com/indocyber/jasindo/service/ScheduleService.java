@@ -18,7 +18,7 @@ public interface ScheduleService {
 
     public Long saveSchedule(UpsertScheduleDTO dto);
 
-    public void saveSchedule(UpsertScheduleDTO dto, Long id);
+    public void saveSchedule(UpsertScheduleDTO dto, Long doctorId);
 
     void deleteSchedule(Long id);
 
