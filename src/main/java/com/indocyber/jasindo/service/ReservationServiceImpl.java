@@ -104,21 +104,6 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public void deleteReservation(Long id) {
-
-        Optional<Reservation> findReservation = reservationRepository.findById(id);
-        Reservation reservation = findReservation.get();
-
-        Optional<Schedule> findSchedule = scheduleRepository.findById(reservation.getSchedule().getId());
-        Schedule schedule = findSchedule.get();
-
-        schedule.setId(schedule.getId());
-        schedule.setDate(reservation.getSchedule().getDate());
-        schedule.setStartTreat(reservation.getSchedule().getStartTreat());
-        schedule.setEndTreat(reservation.getSchedule().getEndTreat());
-        schedule.setDoctor(reservation.getSchedule().getDoctor());
-        schedule.setIsAvailable(true);
-
-        scheduleRepository.save(schedule);
         reservationRepository.deleteById(id);
     }
 
