@@ -5,7 +5,7 @@
 <nav th:replace="~{layout :: navigation}"></nav>
 <header th:replace="~{layout :: header (${breadCrumbs})}"></header>
 <main>
-    <form method="post" class="upsert-form" th:attr="action=@{/schedule/insert(doctorId=${doctorId})}" th:object="${schedule}">
+    <form method="post" class="upsert-form" th:attr="action=@{/schedule/upsert(doctorId=${doctorId})}" th:object="${schedule}">
         <input type="hidden" th:field="*{id}"/>
         <table th:attr="data-action=${type}">
             <tbody>
@@ -40,7 +40,7 @@
             </tbody>
         </table>
         <button class="blue-button" type="submit" th:text="${type} + ' Schedule'"></button>
-        <a class="blue-button" th:href="@{/doctor/index}">Back to Index</a>
+        <a class="blue-button" th:href="@{/schedule/index?doctorId=} + ${doctorId}">Back to Index</a>
     </form>
 </main>
 <footer th:replace="~{layout :: footer}"></footer>

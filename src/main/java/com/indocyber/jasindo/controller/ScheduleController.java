@@ -58,21 +58,20 @@ public class ScheduleController {
         return "schedule/schedule-form";
     }
 
-    @PostMapping("/insert")
-    public String addSchedule(@ModelAttribute("schedule")UpsertScheduleDTO dto,
+    @PostMapping("/upsert")
+    public String upsertSchedule(@ModelAttribute("schedule")UpsertScheduleDTO dto,
                               @RequestParam(required = true) Long doctorId,
                               Model model){
         scheduleService.saveSchedule(dto, doctorId);
         return "redirect:/schedule/index?doctorId="+doctorId;
     }
 
-    @PostMapping("/update")
-    public String updateSchedule(@ModelAttribute("schedule")UpsertScheduleDTO dto,
-                              Model model){
-        scheduleService.saveSchedule(dto);
-        return "redirect:/schedule/index";
+    @GetMapping("/delete")
+    public String delete(@RequestParam(required = true) Long doctorId,
+                         @RequestParam(required = true) Long id){
+        scheduleService.deleteSchedule(id);
+        return "redirect:/schedule/index?doctorId="+doctorId;
     }
-
 
 
 }

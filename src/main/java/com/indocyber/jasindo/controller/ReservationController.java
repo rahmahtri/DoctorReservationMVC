@@ -61,9 +61,10 @@ public class ReservationController {
 
     @PostMapping("/insert")
     public String bookedReservation(@ModelAttribute("dto") InsertReservationDTO dto,
+                                    @RequestParam Long doctorId,
                                     @RequestParam Long scheduleId){
         reservationService.booked(dto, scheduleId);
-        return "redirect:/doctor/index";
+        return "redirect:/schedule/index?doctorId="+doctorId;
     }
 
     @GetMapping("/delete")
