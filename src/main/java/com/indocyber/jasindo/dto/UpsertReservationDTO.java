@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Getter
@@ -14,6 +15,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class UpsertReservationDTO {
     private Long id;
+    @NotNull
     private Long patientId;
     private Long scheduleId;
     @DateTimeFormat(pattern = "yyyy-MM-dd")

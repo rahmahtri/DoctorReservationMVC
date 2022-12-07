@@ -19,13 +19,13 @@
             <tr>
                 <td><label>Start Treat</label></td>
                 <td>
-                    <input type="text" th:field="*{startTreat}">
+                    <input type="time" th:field="*{startTreat}">
                 </td>
             </tr>
             <tr>
                 <td><label>End Treat</label></td>
                 <td>
-                    <input type="text" th:field="*{endTreat}">
+                    <input type="time" th:field="*{endTreat}">
                     <div class="field-validation-error" th:errors="*{endTreat}"></div>
                 </td>
             </tr>

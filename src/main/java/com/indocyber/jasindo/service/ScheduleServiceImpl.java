@@ -106,7 +106,7 @@ public class ScheduleServiceImpl implements ScheduleService{
 
     @Override
     public Page<ScheduleGridDto> getScheduleGrid(Long doctorId, Integer page) {
-        Pageable pagination = PageRequest.of(page-1, rowsInPage, Sort.by("id"));
+        Pageable pagination = PageRequest.of(page-1, rowsInPage, Sort.by("date","startTreat"));
         Page<ScheduleGridDto> grid = scheduleRepository.getScheduleGrid(doctorId, pagination);
         return grid;
     }
